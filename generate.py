@@ -8,6 +8,7 @@ import pickle
 
 # Download CIFAR-10 dataset
 trainset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True)
+x_test = torchvision.datasets.CIFAR10(root='./data', train=False, download=True).data
 
 minority_class = 3  # 'cat' class
 
@@ -23,4 +24,8 @@ imbalanced_data = minority_data + majority_data
 with open('imbalanced_data.pkl', 'wb') as f:
     pickle.dump(imbalanced_data, f)
 
+with open('test_data.pkl', 'wb') as f:
+    pickle.dump(x_test, f)
+
 print(f"Imbalanced dataset created with {len(imbalanced_data)} samples. Data saved to 'imbalanced_data.pkl'")
+print(f"Test dataset created with {len(x_test)} samples. Data saved to 'test_data.pkl'")
